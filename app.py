@@ -21,8 +21,10 @@ mongo = PyMongo(app)
 
 #render about page
 @app.route("/")
+@app.route("/index")
 def index():
-    return render_template("index.html")
+    naam = mongo.db.naam.find()
+    return render_template("index.html", naam=naam)
 
 if __name__=="__main__":
     app.run(host=os.environ.get("IP"),
